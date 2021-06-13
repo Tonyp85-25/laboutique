@@ -22,7 +22,7 @@ jobs:
       run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
     - name: Cache Composer packages
-      id: composer-cache
+      id: composer-caching
       uses: actions/cache@v2
       with:
         path: ${{ steps.composer-cache.outputs.dir }}
@@ -34,7 +34,7 @@ jobs:
       
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
-       with:
+      with:
         php-version: '7.4'
         extensions: mbstring, intl
         ini-values: post_max_size=256M, max_execution_time=180
