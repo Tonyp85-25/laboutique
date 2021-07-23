@@ -1,3 +1,6 @@
+body{
+    position: relative;
+}
 .product-item h5{
     text-transform: uppercase;
     font-size: 15px;
@@ -12,4 +15,13 @@
 
 .product-container{
     margin-bottom: 150px;
+}
+
+.footer-custom{
+    padding: 0.5em;
+    text-align: center;
+    position: absolute;
+    bottom: 0px;
+    width:100%;
+    background-color: #95a6c6;
 }

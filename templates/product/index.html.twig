@@ -10,24 +10,30 @@
         </div>
     {% endfor %}
 {% endfor %}
-<h1>Nos produits</h1>
-<div class="row product-container">
-
-{% for product in products %}
-    <div class="col-md-4">
-        <div class="product-item text-center">
-            <a href="{{path('product',{'slug':product.slug})}}">
-                <img src="/uploads/{{product.illustration}}" alt="{{product.name}}" srcset="" class="img-fluid">
-                </a>
-                <h5>{{product.name}}</h5>
-                <span>{{product.subtitle}}</span>
-           
-            <p>{{(product.price/100)|number_format(2,',') }} €</p>
-        </div>    
+<div class="row">
+    <div class="col-md-3">
+        <h3>Filtrer</h3>
+        {{ form(form) }}
     </div>
-   
+    <div class="col-md-9">
+        <h3>Nos produits</h3>
+        <div class="row product-container">
 
-    
-{% endfor %}
+        {% for product in products %}
+            <div class="col-md-4">
+                <div class="product-item text-center">
+                    <a href="{{path('product',{'slug':product.slug})}}">
+                        <img src="/uploads/{{product.illustration}}" alt="{{product.name}}" srcset="" class="img-fluid">
+                        </a>
+                        <h5>{{product.name}}</h5>
+                        <span>{{product.subtitle}}</span>
+                
+                    <p>{{(product.price/100)|number_format(2,',') }} €</p>
+                </div>    
+            </div>   
+        {% endfor %}
+    </div>
+    </div>
 </div>
+
 {% endblock %}
