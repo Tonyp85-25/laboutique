@@ -17,4 +17,14 @@ class HomeController extends AbstractController
            
         );
     }
+
+    /**
+     * @Route("/credits", name="credits")
+     */
+    public function credits(): Response
+    {
+        return $this->render('home/credits.html.twig'
+           
+        );
+    }
 }
