@@ -37,11 +37,51 @@ class AccountAddressController extends AbstractController
             $address->setCustomer($this->getUser());
             $this->entityManager->persist($address);
             $this->entityManager->flush();
-            $this->redirectToRoute('account_address');
+            $this->addFlash('success', "L' adresse a été créée!");
+           return $this->redirectToRoute('account_address');
 
         }
-        return $this->render('account/address_add.html.twig',[
+        return $this->render('account/address_form.html.twig',[
             'form'=>$form->createView()
         ]);
+    }
+
+     /**
+     * @Route("/compte/modifier-adresse/{id}", name="account_address_edit")
+     */
+    public function edit(Request $request, $id): Response
+    {
+        $address= $this->entityManager->getRepository(Address::class)->findOneBy(['id'=>$id]);
+        if(!$address || $address->getCustomer() !== $this->getUser()){
+            return $this->redirectToRoute('account_address');
+        }
+
+        $form=$this->createForm(AddressType::class,$address);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+                 
+            $this->entityManager->flush();
+            $this->addFlash('success', "L' adresse a été modifiée!");
+           return $this->redirectToRoute('account_address');
+
+        }
+        return $this->render('account/address_form.html.twig',[
+            'form'=>$form->createView()
+        ]);
+    }
+
+     /**
+     * @Route("/compte/supprimer-adresse/{id}", name="account_address_delete")
+     */
+    public function delete(Request $request, $id): Response
+    {
+        $address= $this->entityManager->getRepository(Address::class)->findOneBy(['id'=>$id]);
+        if($address && $address->getCustomer() == $this->getUser()){
+            $this->entityManager->remove($address);
+            $this->entityManager->flush();
+            $this->addFlash('info', "L' adresse a été supprimée!");
+        }
+
+        return $this->redirectToRoute('account_address');
     }
 }
