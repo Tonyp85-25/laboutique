@@ -62,18 +62,24 @@ class Cart
 
     public function getFull()
     {
+        $products=[];
         $userCart =$this->get();
-        $ids = array_keys($userCart);
-        $products = $this->entityManager->getRepository(Product::class)->findSelectedProducts($ids); //optimization : only one request to get products in user's cart
-        if(count($products)>0){
-            foreach ($products as $product) {
-                $product->quantity = $userCart[$product->getId()];
-                
+
+        if($userCart){
+            $ids = array_keys($userCart);
+            $products = $this->entityManager->getRepository(Product::class)->findSelectedProducts($ids); //optimization : only one request to get products in user's cart
+            if(count($products)>0){
+                foreach ($products as $product) {
+                    $product->quantity = $userCart[$product->getId()];                  
+                }  
+            }else{
+                $this->remove();
             }
-            return $products;
-        } else{
-            return[];
         }
+     
+        
+        return $products;
+        
        
     }
 
