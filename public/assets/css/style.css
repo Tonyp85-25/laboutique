@@ -17,6 +17,11 @@ body{
     margin-bottom: 150px;
 }
 
+.block-small{
+    max-width: 600px;
+    margin:0 auto;
+}
+
 .footer-custom{
     padding: 0.5em;
     margin-top: 1em;

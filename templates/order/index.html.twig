@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ma commande|La Boutique française {% endblock %}
+
+{% block content %}
+
+<h2>Je passe ma commande</h2>
+<p>Chosisissez vos préférences avant de passer votre commande sur la boutique française</p>
+<hr>
+<div class="row">
+    <div class="col-md-6">
+
+        {% set formHtml %}
+            {{ form(form) }}
+        {% endset %}
+        {{ formHtml|replace({'[br]' : '</br>'})|raw }}
+    </div>
+    <div class="col-md-6">
+        <p>Récap de ma commande</p>
+        <button class=" btn btn-block btn-success">Payer</button>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -63,6 +63,11 @@ class Address
      */
     private $country;
 
+    public function __toString()
+    {
+        return $this->name.'-'.$this->getAddress().'-'.$this->getCity();
+    }
+
     /**
      * @ORM\Column(type="string", length=50)
      */
