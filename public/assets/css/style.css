@@ -30,3 +30,18 @@ body{
     width:100%;
     background-color: #95a6c6;
 }
+.form-check{
+    background-color: #f4f8ff;
+    padding:20px 65px;
+    margin-top:7px;
+}
+
+.order-summary{
+    background-color: #f4f8ff;
+    padding:20px;
+    margin-top:22px;
+}
+
+.col-form-label{
+    font-weight: bold;
+}
