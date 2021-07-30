@@ -92,4 +92,26 @@ class OrderController extends AbstractController
         return $this->redirectToRoute('cart');
         
     }
+
+    /**
+     * @Route("/commande/mes-commandes", name="orders_list")
+     */
+    public function all(): Response
+    {
+        $orders = $this->entityManager->getRepository(Order::class)->findSuccessfullOrders($this->getUser());
+        return $this->render('order/all.html.twig',[
+            'orders'=>$orders
+        ]);
+    }
+
+    /**
+     * @Route("/commande/mes-commandes/{reference}", name="order_show")
+     */
+    public function show($reference): Response
+    {
+        $order = $this->entityManager->getRepository(Order::class)->findOneBy(['reference'=>$reference]);
+        return $this->render('order/show.html.twig',[
+            'order'=>$order
+        ]);
+    }
 }
