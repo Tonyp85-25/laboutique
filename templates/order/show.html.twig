@@ -1,28 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}La Boutique Française|Mon panier{% endblock %}
+{% block title %}La Boutique Française|commande{% endblock %}
 
 {% block content %}
-    <h1>Mon panier</h1>
-    Retrouvez l'ensemble des produits que vous avez ajouté à votre panier.
+    <h1>La commande </h1>
     <hr>
-    {% if cart|length >0 %}
-      
+
+    <strong>Commande passée le : {{order.createdAt|date('d/m/Y')}}</strong>
+    <strong>Transporteur choisi : {{ order.carrierName}}</strong>
    
     <table class="table">
   <thead>
     <tr>
       <th scope="col">Produit</th>
-      <th scope="col"></th>
       <th scope="col">Quantité</th>
       <th scope="col">Prix</th>
       <th scope="col">Total</th>
-      <th></th>
+
     </tr>
   </thead>
   <tbody>
   {% set total = null %}
-  {% for product in cart %}
+  {% for product in order.orderDetails %}
     <tr>
     <th>
         <img src="/uploads/{{product.illustration}}" alt=" {{product.name}}" srcset="" height="75px">
@@ -30,12 +29,10 @@
     <td>{{product.name}} <br>
         <small>{{product.subtitle}}</small> 
     </td> 
-    <td> x {{product.quantity}}  <a href="{{path('add_to_cart',{'id':product.id})}}" class="ml-2 ">
-    <img src="{{asset('assets/img/plus.png')}}" alt="delete" srcset="" height="14px" class=""></a> <a href="{{path('reduce_cart_item',{'id':product.id})}}" >
-    <img src="{{asset('assets/img/remove.png')}}" alt="reduce quantity" srcset="" height="14px" class=""></a></td>
+    <td> x {{product.quantity}} class="ml-2 ">
     <td>{{(product.price/100)|number_format(2, ',', '.')}} €</td>
     <td>{{(product.price/100 * product.quantity)|number_format(2, ',', '.')}} €</td>
-    <td><a href="{{path('delete_cart_item',{'id':product.id})}}">
+
     <img src="{{asset('assets/img/delete.png')}}" alt="delete" srcset="" height="18px"></a>
     </td>
     </tr>

@@ -41,6 +41,24 @@ class ProductRepository extends ServiceEntityRepository
 
         return $query->getQuery()->getResult();
     }
+
+    /**
+     * returns products in user's cart (not in course)
+     */
+    public function findSelectedProducts($ids=[])
+    {
+        if(count($ids)<=0)
+        {
+            return;
+        }else{
+            $query=$this->createQueryBuilder('p')
+            ->select('p')
+            ->andWhere('p.id IN (:ids)')
+            ->setParameter('ids',$ids);
+
+            return $query->getQuery()->getResult();
+        }
+    }
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */

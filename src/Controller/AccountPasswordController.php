@@ -19,7 +19,7 @@ class AccountPasswordController extends AbstractController
         $notification=null;
         $user = $this->getUser();
         $form =$this->createForm(ChangePasswordType::class,$user);
-        $form->handleRequest();
+        $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
             $old_password = $form->get('old_password')->getData();

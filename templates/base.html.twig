@@ -43,15 +43,18 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{path('products')}}">Nos produits <span class="sr-only">(current)</span></a>
                 </li>
-            <li class="nav-item"></li>
+            <li class="nav-item">
+            <a class="nav-link" href="">Qui sommes-nous <span class="sr-only">(current)</span></a></li>
                
             </ul>
             {% if app.user %}
-                <a  <a class="nav-link" href="{{path('account')}}">Mon compte</a> | <a <a class="nav-link"  href="{{path('app_logout')}}">Déconnexion</a>
+                <a  <a class="nav-link" href="{{path('account')}}">Mon compte ({{ app.user.firstname }})</a> | <a <a class="nav-link"  href="{{path('app_logout')}}">Déconnexion</a>
+              
             {% else %}
-                    <a <a class="nav-link"  href="{{path('app_login')}}">Connexion</a> | <a <a class="nav-link"  href="{{path('register')}}">Inscription</a>
+                    <a  class="nav-link"  href="{{path('app_login')}}">Connexion</a> | <a <a class="nav-link"  href="{{path('register')}}">Inscription</a>
+                     
             {% endif %}
-        
+         <a  class="nav-link"  href="{{path('cart')}}"><img src="{{asset('assets/img/shopping-cart.png')}}" alt="cart" srcset="" height="25px"></a> 
             {# <form class="form-inline mt-2 mt-md-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="votre recherche" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
@@ -133,7 +136,7 @@
        <h4>&copy; 2021 La boutique française </h4>
        <p>La boutique 100% made in France</p>
         <div class="">
-            <a href="#">Privacy</a> <a href="#">Terms</a>
+            <a href="#">Privacy</a> <a href="#">Terms</a> <a href="{{path('credits')}}">Crédits</a>
        </div>
     </footer>
 </main>
